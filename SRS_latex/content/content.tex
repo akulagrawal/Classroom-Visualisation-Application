@@ -1,0 +1,301 @@
+\chapter{Introduction}
+\label{ch:intro}
+\section{Purpose}
+\section{Document Conventions}
+\section{Intended Audience and Reading Suggestions}
+\section{Product Scope}
+\section{References}
+
+
+\chapter{Overall Description}
+\label{Overall Description}
+
+\section{Product Perspective}
+This android application is mainly intended to serve the lecturers. The
+goal behind developing this application is to develop a mechanism to make
+the lecturer aware of the students' states at any instant of time easily
+and without making any disturbance, while displaying the states in an
+easily interpretable manner. Though the target audience includes lecturers,
+it would also be open to use by other small presenters. The application
+shows the state of the audience in real-time at any instance of time, thus,
+giving the presenter an idea of audience's mood.
+
+\section{Product Functions}
+Functions included in the final product will be as follows:
+\begin{itemize}
+
+\item[*]
+Face Recognition
+
+\quad recognize the faces of students present in the class
+\item[*]
+Random State Generation
+
+\quad generate and assign random states to the enrolled students
+\item[*]
+Real-Time Augmentation of States
+
+\quad states of corresponding students will be displayed in real-time by bounding box
+\item[*]
+Student Detail Edition
+
+\quad edit details of an enrolled student
+
+\end{itemize}
+
+
+\section{User Classes and Characteristics}
+The intended users for the product should have the following characteristics:
+\begin{itemize}
+\item[*]
+Intended users are mainly lecturers, but the application is suitable for
+any presenters with a known audience.
+\item[*]
+The users should be able to afford and use an Android device above the specified API level.
+\item[*]
+The users should understand the functioning and operation of the software on a basic level.
+\item[*]
+The users should be able to understand the English Language to operate the application.
+\end{itemize}
+
+\section{Operating Environment}
+The application will work in any Android based smart-phone with version 5.0 and above. It will require at least 3MP camera.
+
+\section{Assumptions and Dependencies}
+The main functioning of the application depends on accuracy of OpenCV
+libraries in facial recognition which is the main building block of
+result evaluation. Android and OpenCV are open source leading our
+application to be free of cost. Performance of application will depend
+on android version and hardware architecture.
+
+\newpage
+
+
+
+
+\chapter{External Interface Requirements}
+\label{External Interface Requirements}
+
+\section{User Interfaces}
+The application would have a user friendly interface and users of every age group could operate the app easily. 
+
+The app would contain dedicated buttons to following:
+\begin{itemize}
+\item[.] Add new student
+\item[.] Edit existing students:
+
+\quad For adding new students and editing existing students on screen keyboard.
+
+\item[.] Display list of existing students
+\item[.] Opening camera view and recognizing students.
+
+\quad The app will recognize students in real time and augment a bounding box to each of their faces of a specific color according to assigned random states.
+\end{itemize}
+
+There would be a “Help Me” section describing steps to be followed to use application. It shall provide specific guidelines to a user for using product within the device.
+
+\section{Hardware Interfaces}
+A typical android smart-phone with the basic peripherals (Touch Screen, Rear camera) is needed to run and have full control of the product. Further access to storage is required to store training images for recognizing the individuals.
+
+This app will require 400MB of RAM and 100MB free space and above as number of students increases.
+
+\section{Software Interfaces}
+This system can operate on Android versions 5.0 and above.
+
+\chapter{Functional Requirements}
+\label{Functional Requirements}
+
+\section{Image Recognition and state allocation}
+\begin{enumerate}
+\item[•] \textbf{Input:} Real time Video.
+\item[•] \textbf{Output:} A bounding box will be augmented in rear view after allocation of state.
+\item[•] \textbf{Description:} This function will augment bounding box of allocated state in real time.
+\end{enumerate}
+
+\subsection{Recognize Faces and their coordinates}
+\begin{enumerate}
+\item[•] \textbf{Input:} Video
+\item[•] \textbf{Output:} Coordinates of Faces and their names
+\item[•] \textbf{Description:} This function would recognize faces.
+\end{enumerate}
+
+\subsubsection{4.1.1.1 Capture Video}
+\begin{enumerate}
+\item[•] \textbf{Input:} View from rear camera
+\item[•] \textbf{Output:}Video in OpenCV format
+\item[•] \textbf{Description:} In this function video will be taken from front camera which will be further used for processing and producing desired results.
+\end{enumerate}
+
+\subsubsection{4.1.1.2 Convert continuous video to images}
+\begin{enumerate}
+\item[•] \textbf{Input:} Video in OpenCV format.
+\item[•] \textbf{Output:}Image Frames.
+\item[•] \textbf{Description:} This function would convert input video into images that will act as raw data for further functions.
+\end{enumerate}
+
+\subsubsection{4.1.1.3 Face Recognition}
+\begin{enumerate}
+\item[•] \textbf{Input:} Image Frames
+\item[•] \textbf{Output:} Recognized Faces and their coordinates
+\item[•] \textbf{Description:} This function would identify faces and their coordinates.
+\end{enumerate}
+
+\subsection{Bounding Box according to allocated states}
+\begin{enumerate}
+\item[•] \textbf{Input:} Student ID of identified students
+\item[•] \textbf{Output:} Augmented bounding box in real time
+\item[•] \textbf{Description:} Bounding box of specific color would be augmented according to allocated states.
+\end{enumerate}
+
+\subsubsection{4.1.2.1 Random State Allocation}
+\begin{enumerate}
+\item[•] \textbf{Input:} Student ID
+\item[•] \textbf{Output:} Random integer between 1 and 10(inclusive)
+\item[•] \textbf{Description:} This allocates random state to each identified student.
+\end{enumerate}
+
+\subsubsection{4.1.2.2 Bounding Box}
+\begin{enumerate}
+\item[•] \textbf{Input:} Student IDs and coordinates of their faces.
+\item[•] \textbf{Output:} Augmented bounding box in real time.
+\item[•] \textbf{Description:} This allocates bounding box of specific color to each face according to allocated random state.
+\end{enumerate}
+
+\section{Flash Light}
+\begin{enumerate}
+\item[•] \textbf{Input:} Click of a dedicated button
+\item[•] \textbf{Output:} Flash light turns on
+\item[•] \textbf{Description:} This turns on flash light in times of bad lighting in room.
+\end{enumerate}
+
+\section{What Next Lohit Peeps :)}
+\section{What Next Lohit Peeps :)}
+\section{What Next Lohit Peeps :)}
+\section{What Next Lohit Peeps :)}
+\section{What Next Lohit Peeps :)}
+\section{Work completed from Lohit :D }
+\section{Not Yet ;) Editting tomorrow. Will start in morning what say? call whenever}
+
+
+\section{Student Addition}
+
+\paragraph{Input:}
+Student Details
+\paragraph{Output:}
+Popup confirmation of addition of student details
+\paragraph{Description:}
+Function to take details of the student to be added. Details include name, 
+unique college id(roll number) and 20 different images of the student. The
+details and corresponding images are stored in the database.
+
+
+\subsection{Student Specifications Addition}
+\paragraph{Input:}
+Student specifications
+\paragraph{Output:}
+Popup confirmation of adding of new student in database with given specifications
+\paragraph{Description:}
+Function to take the name and unique college id(roll number) of the student
+to be added. New database is created with the entered details.
+
+\subsection{Student Images Addition}
+\paragraph{Input:}
+20 different images of the student to be added and unique college id
+(roll number) of the new student to be added
+\paragraph{Output:}
+Popup confirmation of updating the new student database with the 20 images
+\paragraph{Description:}
+Function to take 20 different images of the student to be added. The images are
+stored in the database corresponding to the unique roll number.
+
+
+\subsubsection{4.1.2.1 Student Images Addition from gallery}
+\paragraph{Input:}
+20 different images of the student to be added from the gallery and unique
+college id(roll number) of the new student to be added
+\paragraph{Output:}
+Popup confirmation of updating the new student database with the 20 images
+\paragraph{Description:}
+Function to take 20 different images of the student corresponding with the
+given roll number from the gallery. The images are stored in the database
+corresponding to the unique roll number.
+
+
+\subsubsection{4.1.2.2 Student Images Addition from camera}
+\paragraph{Input:}
+Unique college id(roll number) of the new student to be added
+\paragraph{Output:}
+Popup confirmation of updating the new student database if number of images
+is 20 and popup of error message if number of images is less than 20
+\paragraph{Description:}
+Function to take the roll number of the new student and open the camera to
+take his 20 different images. If the number of images is less than 20, no database
+is formed and user is prompted to add more images with the corresponding roll number.
+Otherwise, The images are stored in the database corresponding to the unique roll number.
+
+
+\section{Student Deletion}
+\paragraph{Input:}
+Unique college id(roll number) of the student to be removed from the database
+\paragraph{Output:}
+Popup confirmation of deletion of student details with the updated database
+\paragraph{Description:}
+Function to take unique college id of the student to be deleted. If a
+student with the corresponding roll number is found in the database, 
+it is removed from the database.
+
+
+\section{Student List Display}
+\paragraph{Input:}
+Database of the students
+\paragraph{Output:}
+Details of the added students displayed on the screen
+\paragraph{Description:}
+Function that takes the database of the added students and displays the name
+and unique roll number of all the added students along with an image of each
+student.
+
+
+\section{Edit Student}
+\paragraph{Input:}
+Student ID
+\paragraph{Output:}
+Popup with confirmation of update student data.
+\paragraph{Description:} This function will update student data as specified.
+
+\subsection{Editing student details}
+\paragraph{Input:}
+New Details of the specified student
+\paragraph{Output:}
+Popup with confirmation of updatedd student details in the database.
+\paragraph{Description:} This function will update student details such as some correction in name or other details.
+
+\subsection{Retraining face recognition model for a student}
+\paragraph{Input:}
+New images of specified student.
+\paragraph{Output:}
+Updated trained model of face recognition, trained according to new images.
+\paragraph{Description:}
+This function can be used if image recognition is not working properly for a student due to bad photos being used for training. Face recognition model can be retrained according to new, better orientation and lighting images.
+
+\chapter{Other Nonfunctional Requirements}
+\label{Other Nonfunctional Requirements}
+
+\section{Performance Requirements}
+\section{Safety Requirements}
+\section{Security Requirements}
+\section{Software Quality Attributes}
+\section{Business Rules}
+
+\chapter{Other Requirements}
+\label{Other Requirements}
+
+\begin{appendices}
+\chapter{Glossary}
+\chapter{Analysis Models}
+\chapter{To Be Determined List}
+
+
+\end{appendices}
+
+

@@ -1,0 +1,526 @@
+\documentclass{scrreprt}
+\setcounter{secnumdepth}{5}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Software Requirement Specification},    % title
+    pdfauthor={Jean-Philippe Eisenbarth},                     % author
+    pdfsubject={TeX and LaTeX},                        % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=all            % only page is linked
+}                                          %
+\def\myversion{1.0 }
+\date{}
+\title{}
+\usepackage{hyperref}
+\begin{document}
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{CS-223\\SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
+        \vspace{1.5cm}
+        for\\
+        \vspace{1.5cm}
+        Project 7\\
+        Classroom Visualisation App-1\\
+        
+        \vspace{1.9cm}
+        \LARGE{Prepared by: }\\
+        Group-12\\
+        Mitansh Jain - 160101042\\
+        Sujoy Ghosh - 160101073\\
+        Akul Agrawal - 160101085\\
+        \vspace{1.9cm}
+        \today\\
+    \end{bfseries}
+\end{flushright}
+\tableofcontents
+
+
+\chapter{Introduction}
+
+\section{Purpose}
+In this Document, we describe the software requirements for an
+android application, named as "Classroom Visualiser". The
+purpose of this document is to give a detailed description of the requirements
+for the application. It will illustrate the purpose and complete declaration for the
+development of system. It will also explain system constraints, interface and
+interactions with other external applications. This SRS covers how the entire
+application, from front end graphical user interface to the back end of the
+product, recognizes the student and maps them to their assigned state.
+
+\section{Document Conventions}
+The format specified by IEEE was followed while creating this document. 
+The headings of each topic are in bold. Bullet points are used
+wherever required.
+
+\section{Intended Audience and Reading Suggestions}
+This Software Requirements Document is intended for:
+
+\begin{itemize}
+\item[•] Developers who can review project’s capabilities and 
+more easily understand where their efforts should be targeted to improve or add more features to it (design and code the application it sets the guidelines for future development).
+
+\item[•] Project testers can use this document as a base for their 
+testing strategy as some bugs are easier to find using a 
+requirements document. This way testing becomes more methodically organized
+.
+\item[•] End users of this application who wish to read about 
+what this application can do.
+\end{itemize}
+
+In the next section, we discuss about Product perspective, Product functions, User Classes and Characteristics and Operating environment. Then the external interface requirements highlighting the logical characteristics of each interface between the software product and the users are discussed, followed by system features with their functional requirements are presented to highlight the major services provided by the intended product.Finally, this specification is concluded with the Nonfunctional Requirements and reference documents on which this document is based on. 
+
+
+\section{Project Scope}
+The purpose of this project is to create convenient and easy-to-use android app
+for users. This app will enable professors to recognise the students present in the class and map them to their assigned states and augment a bounding box of particular color. The architecture of the app will allow
+it to be compatible to additional functionality for dynamic state allocation.
+
+
+The system is based on computer vision. Above all, we
+hope to provide a comfortable user experience along with best results.
+
+\section{References}
+IEEE. IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements
+Specifications. IEEE Computer Society, 1998
+
+
+\chapter{Overall Description}
+
+\section{Product Perspective}
+This android application is mainly intended to serve the lecturers. The main goal behind developing this application was to develop a mechanism to make the lecturer aware of attentiveness of the students. Due to short span of development-time, the states of the
+students are assigned randomly. The app will recognise the students present in class at any instant of time and map them to their assigned states by augmenting a bounding box based on state value. Though the target audience includes lecturers, it would also be open to use by other presenters. This application will help organisers to recognise people at some event and determine their states. 
+
+\section{Product Functions}
+Functions included in the final product will be as follows:
+\begin{itemize}
+
+\item[•]
+Image recognition and state allocation 
+\item[•]
+Student addition
+\item[•]
+Student deletion
+\item[•]
+Editing student data
+\item[•]
+Sign-up
+\item[•]
+Login
+\item[•]
+Logout
+\end{itemize}
+
+\section{User Classes and Characteristics}
+The intended users for the product should have the following characteristics:
+\begin{itemize}
+\item[•]
+Intended users are mainly lecturers, but the application is suitable for
+any presenters with a known audience.
+\item[•]
+The users should be able to afford and use an Android device with specified specifications.
+\item[•]
+The users should understand the functioning and operation of the software on a basic level.
+\item[•]
+The users should be able to understand the English Language to operate the application.
+\end{itemize}
+
+\section{Operating Environment}
+The application will work in any Android based smart-phone with version 6.0 and above. It will require at least 5MP camera.
+
+\section{Assumptions and Dependencies}
+
+The main functioning of the application depends on accuracy of OpenCV libraries in facial recognition which is the main building block of result evaluation. Android and OpenCV are open source leading our application to be free of cost. Performance of application will depend on android version and hardware architecture.
+
+
+\chapter{External Interface Requirements}
+
+\section{User Interfaces}
+The application would have a user friendly interface and users of every age group can operate the app easily.
+App would start with a login screen where user will have to provide credentials to access portal.
+
+Portal would contain dedicated buttons to following:
+\begin{itemize}
+\item[•] Add new student
+\item[•] Edit existing students:
+
+\quad For adding new students and editing existing students on screen keyboard.
+
+\item[•] Display list of existing students
+\item[•] Opening camera view and recognizing students.
+
+\quad The app will recognize students in real time and augment a bounding box to each of their faces of a specific color according to assigned states.
+\item[•] A logout button to exit portal.
+\end{itemize}
+
+\section{Hardware Interfaces}
+A typical android smart-phone with the basic peripherals (Touch Screen, Rear camera) is needed to run and have full control of the product. Further access to storage is required to store training images for recognizing the individuals.
+
+This app will require 400MB of RAM and 100MB free space and above as number of students increases.
+
+The final developed product will be usable by any Android with :
+\begin{enumerate}
+
+\item[•] Android 6.0 (Marshmallow) or API level 23 with least recommended resolution of 1280x720.
+\item[•] Minimum RAM size : 400 MB
+\item[•] Least version of CPU: Dual Core 1.2 GHz 
+\item[•] Minimum required Space : 300 MB
+\item[•] Video : 720p@30fps
+\item[•] Rear Camera: Least specs -$>$ 5.0 MP
+
+\end{enumerate}
+
+\section{Software Interfaces}
+This system can operate on Android versions 6.0 and above. We shall use OpenCV, namely Open Source Computer Vision, to recognise faces using training dataset of atleast 20 images of a person. Android Studion will be our IDE(Integrated Development Environment), which includes comprehensive set of development tools. Its libraries will help us augment bounding box around faces, according to its state.
+
+
+\chapter{Functional Requirements}
+\label{Functional Requirements}
+This section will describe in detail all the features in the previous section.
+
+\section{Image recognition and state allocation}
+\begin{enumerate}
+\item[•] \textbf{Input:} Real time video
+\item[•] \textbf{Output:} Bounding boxes augmented in real time according to allocated states
+\item[•] \textbf{Description:} This function will recognize the faces of the students
+and assign random states to each student every 5 minutes. Bounding boxes of the color
+corresponding to the allocated states will be augmented to the recognized faces in real time.
+\end{enumerate}
+
+\subsection{Face detection and recognition}
+\begin{enumerate}
+\item[•] \textbf{Input:} Real time video
+\item[•] \textbf{Output:} Coordinates of faces in the video and unique student ID
+corresponding to each face
+\item[•] \textbf{Description:} This function will process the real-time video and detect the faces.
+Also, it will recognize the student corresponding to the detected faces.
+\end{enumerate}
+
+\subsubsection{Video capture}
+\begin{enumerate}
+\item[•] \textbf{Input:} View from rear camera
+\item[•] \textbf{Output:} Captured video in processable OpenCV format
+\item[•] \textbf{Description:} In this function, video will be taken from rear camera and stored
+in such a format that it can be further used for processing and producing desired results.
+\end{enumerate}
+
+\subsubsection{Video to image frames conversion}
+\begin{enumerate}
+\item[•] \textbf{Input:} Video in a processable OpenCV format
+\item[•] \textbf{Output:} Image frames corresponding to the input video
+\item[•] \textbf{Description:} This function will convert the input video into a number
+of image frames in sequential order which will act as raw data for further processing.
+\end{enumerate}
+
+\subsubsection{Face recognition}
+\begin{enumerate}
+\item[•] \textbf{Input:} Image frames corresponding to the real-time video
+\item[•] \textbf{Output:} Recognized faces and their coordinates, along with their corresponding student ID
+\item[•] \textbf{Description:} This function will detect the location of faces from the image frames and find the student corresponding to each face.
+\end{enumerate}
+
+\subsection{Random state generator}
+\begin{enumerate}
+\item[•] \textbf{Input:} Time of last random state generation
+\item[•] \textbf{Output:} Updated random states along with updated time of the last random state generation as current
+time, if last random state was generated more than 5 minutes before.
+\item[•] \textbf{Description:} This function will generate random states corresponding to each student and
+update the current states of the students if the time of the last update is found to be  more than 5 minutes
+ago. Also, the time of the last generation of random states would be updated if the random states
+are updated.
+\end{enumerate}
+
+\subsection{Bounding box augmentation with given states}
+\begin{enumerate}
+\item[•] \textbf{Input:} Student IDs of the students whose face has been recognized along with the coordinates of their
+corresponding faces
+\item[•] \textbf{Output:} Augmented bounding boxes in real time
+\item[•] \textbf{Description:} This function finds the color of the bounding box corresponding to the assigned states of the students
+whose face has been recognized, and augments a bounding box of that color around the recognized faces.
+\end{enumerate}
+
+\subsubsection{State-color mapper}
+\begin{enumerate}
+\item[•] \textbf{Input:} Student IDs of the students whose face has been recognized
+\item[•] \textbf{Output:} Allocated colors of the bounding box corresponding to each recognized student
+\item[•] \textbf{Description:} This function finds the colors of the bounding boxes corresponding to the assigned states of the
+recognized students.
+\end{enumerate}
+
+\subsubsection{Bounding box augmentation with given colors}
+\begin{enumerate}
+\item[•] \textbf{Input:} Details of recognized students along with coordinates of the recognized faces and corresponding
+color of augmentation boxes
+\item[•] \textbf{Output:} Augmented bounding box in real time.
+\item[•] \textbf{Description:} This function augments the bounding box around the recognized faces with the corresponding
+color, along with the details of the student
+\end{enumerate}
+
+\subsection{Flash light toggle}
+\begin{enumerate}
+\item[•] \textbf{Input:} Instance trigger.
+\item[•] \textbf{Output:} Toggles flash light.
+\item[•] \textbf{Description:} This turns on flash light in times of bad lighting in room or turns it off if it was on.
+\end{enumerate}
+
+\section{Student addition}
+\begin{enumerate}
+
+\item[•]  \textbf{Input:} Student Data
+\item[•]  \textbf{Output:}
+Popup confirmation of addition of student details
+\item[•]  \textbf{Description:}
+Function to insert details of the student into database . Details include name Student ID and 20 different images of the student. The
+details and corresponding images are stored in the database.
+\end{enumerate}
+
+\subsection{Student details addition}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Student details
+\item[•]  \textbf{Output:}
+Popup confirmation of adding of new student in database with given specifications
+\item[•]  \textbf{Description:}
+Function to take the name and student ID of the student
+to be added. New entry in database is created with the entered details.
+\end{enumerate}
+
+\subsection{Student images addition}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Student ID and images
+\item[•]  \textbf{Output:}
+Popup confirmation of updating the new student database with the 20 images
+\item[•]  \textbf{Description:}
+Function to take 20 different images of the student to be added. The images are
+stored in the database corresponding to the student ID.
+\end{enumerate}
+
+\subsubsection{Student images addition from gallery}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+20 different images of the student to be added from the gallery and student ID of the new student to be added
+\item[•]  \textbf{Output:}
+Popup confirmation of updating the new student database with the 20 images
+\item[•]  \textbf{Description:}
+Function to take 20 different images of the student corresponding with the
+given roll number from the gallery. The images are stored in the database
+corresponding to the unique roll number.
+\end{enumerate}
+
+\subsubsection{Student images addition from camera}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Instance trigger
+\item[•]  \textbf{Output:}
+Popup confirmation of updating the new student database if number of images
+is 20 and popup of error message if number of images is less than 20.
+\item[•]  \textbf{Description:}
+Function to take the roll number of the new student and open the camera to
+take his 20 different images. If the number of images is less than 20, no database
+is formed and user is prompted to add more images with the corresponding student ID.
+Otherwise, The images are stored in the database corresponding to the unique student ID.
+\end{enumerate}
+
+
+\section{Student deletion}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Student ID of the student to be removed from the database
+\item[•]  \textbf{Output:}
+Popup confirmation of deletion of student details with the updated database
+\item[•]  \textbf{Description:}
+Function to take unique college id of the student to be deleted. If a
+student with the corresponding Student ID is found in the database, 
+it is removed from the database.
+\end{enumerate}
+
+\section{Student list display}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Instance trigger
+\item[•]  \textbf{Output:}
+Details of the students displayed on the screen
+\item[•]  \textbf{Description:}
+Function that takes the database of the added students and displays the name
+and student ID of all the added students along with an image of each
+student.
+\end{enumerate}
+
+
+\section{Edit student}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Student ID along with data to updated
+\item[•]  \textbf{Output:}
+Popup with confirmation of updated student data
+\item[•]  \textbf{Description:} This function will update student data in the database with specified input.
+\end{enumerate}
+
+\subsection{Editing student details}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+New Details of the specified student
+\item[•]  \textbf{Output:}
+Popup with confirmation of updated student details in the database
+\item[•]  \textbf{Description:} This function will update student details such as some correction in name or other details.
+\end{enumerate}
+
+\subsection{Retraining face recognition model for a student}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+New images of specified student.
+\item[•]  \textbf{Output:}
+Updated trained model of face recognition, trained according to new images.
+\item[•]  \textbf{Description:}
+This function can be used if image recognition is not working properly for a student due to bad photos being used for training. Face recognition model can be retrained according to new better
+\end{enumerate}
+
+\section{Sign-up}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+User credentials and other details
+\item[•]  \textbf{Output:} Sign-up Confirmation
+\item[•]  \textbf{Description:}
+This function will enable user to receive authorization to use the app so that his database is safe from others' interference.
+\end{enumerate}
+
+\section{Login}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+User login credentials
+\item[•]  \textbf{Output:}Two Possible outputs:
+\begin{enumerate}
+\item [-] Access to portal if credentials are correct.
+\item [-] Wrong credentials message
+\end{enumerate}
+\item[•]  \textbf{Description:}
+This function will take user credentials as input and will give access to the portal if credentials are correct, otherwise display the wrong credentials message. 
+\end{enumerate}
+
+\section{Logout}
+\begin{enumerate}
+\item[•]  \textbf{Input:}
+Instance trigger
+\item[•]  \textbf{Output:}
+Logging out from the users' account and appearance of the login screen
+\item[•]  \textbf{Description:}
+This function will close the portal and bring app to the login screen.
+\end{enumerate}
+
+\chapter{Other Nonfunctional Requirements}
+
+\section{Performance Requirements}
+The performance of the product shall depend on the quality of the video captured.
+The product shall take initial load time depending on OpenCV libraries to load.
+The performance of the product shall depend on the hardware components of the client’s device.
+
+Video bitrate maybe high and OpenCV might take high CPU usage and hence app would run smoothly on high end phones.
+
+\section{Security}
+The system will use a login system for authentication and thus will be highly secure and will prevent any type of unauthorised access to private contents.  
+
+\section{Software Quality Attributes}
+This section includes additional quality characteristics of the product :
+
+
+\subsection{Reliability}
+The software is supposed to work properly while running any light-weight background processes.
+
+It is supposed to recognise person when video is captured in proper lighting conditions.
+The face of the user should be in proper orientation and only limited no. of faces should be there in focus, determined according to camera quality.
+
+\subsection{Availability}
+The system will be available for use whenever the user deems necessary 24/7. 
+The system shall allow users to restart the application after failure with the loss of at most the last image matrix captured while operation.
+
+\subsection{Maintainability}
+The system will be updatable from software patches available through the Google Play Store. Any discrepancies will be addressable by any developer as the coding will be done according to the coding standards of IEEE.
+
+\subsection{Portability}
+The software will be easily transferrable to any Android device satisfying the minimum software dependency requirements as specified in this SRS Document. The software can be installed on an Android using the same method as any other Android App via the
+Android App Manager.
+
+\section{Usability}
+The system has been envisioned according to the User Center Design model(UCD). The usability of the system has been described based on the factors given below :
+
+\subsection{Contextual Inquiry}
+Contextual Inquiry is a user centred design research method which is usually structured as an approximately two hour one on one interaction in which the researcher watches the user in the course of users normal activities and discusses those activities with the user.
+\linebreak
+It can be performed in following ways:
+\begin{enumerate}
+\item[•] \textbf{Active CI :} In this type of CI, the user is actively included in development team.
+\item[•] \textbf{Passive CI :} In this type of CI, the user merely provides his observations and experiences to be recorded by the administrators.
+\end{enumerate}
+In our development project we have adopted passive type of contextual inquiry. Following the above convention we had proper contextual inquiry with 4 target users.
+
+\begin{enumerate}
+\item[-] \textbf{Interview :}
+In this part of contextual inquiry, the users were provided with general idea of the application and then asked same set of questions to all of them. Their responses to the questions are as follows:
+
+\begin{enumerate}
+\item[] \textbf{Question 1 :} Would you prefer to use this app for attendance purposes over signature based attendance ?
+\begin{enumerate}
+\item[-] \textbf{User 1 :} Yes, I would prefer to use this app for attendance purposes because signature based attendance takes a lot of class-time. Passing the attendance sheets distracts the students concentration.
+\item[-] \textbf{User 2 :} Yes, I would prefer to use this app for attendance purposes. I generally take attendance myself, so it will save my lecture time and help me to focus more on my lecture.
+\item[-] \textbf{User 3 :} I would surely try this app. But it may happen that some students, specially backbenchers, may not be recognised during lecture, which will hamper thier attendance. So, I would like to see the accuracy level of the app. 
+\end{enumerate}
+\newpage
+\item[] \textbf{Question 2 :} How much frequent would you like to run the application so that students are notified of their loosing attentiveness?
+\begin{enumerate}
+\item[-] \textbf{User 1 :} Every 2-3 minutes so that they remain focussed during the lecture.
+\item[-] \textbf{User 2 :} Every 5 minutes, so that they can enjoy the class and there is active participation from all students.
+\item[-] \textbf{User 3 :} Every 7-8 minutes, I like the students to relax a bit during lectures so that they dont get bored.
+
+\end{enumerate}
+\item[] \textbf{Question 3 :} Would you like to cross-check possibility of proxies using this application? 
+\begin{enumerate}
+\item[-] \textbf{User 1 :} Yes, I would like to use this app for cross-checking possibility of proxies. This will help me concentrate more on lecture rather than wasting my time on manual checking for proxies.
+\item[-] \textbf{User 2 :} I shall surely try it once, but it may happen that it is not able to recognise some students, so it may be problematic for them.
+\item[-] \textbf{User 3 :} I have full confidence on signature-based attendance. But I would use this app to confirm its accuracy.
+\end{enumerate}
+\item[] \textbf{Question 4 :} Do you want to give any suggestions?
+\begin{enumerate}
+\item[-] \textbf{User 1 :} If possible, please include flash light feature so that faces can be recognised during low lighting conditions.
+\item[-] \textbf{User 2 :} I am not able to think of any suggestion for the moment. I'm sorry.
+\item[-] \textbf{User 3 :} You may add login feature that will keep the data secured.
+\end{enumerate}
+\end{enumerate}
+
+\end{enumerate}
+
+\chapter{Other Requirements}
+A general knowledge of using smartphones is required to use the product.
+The primary requirement for this application is Rear camera.
+Failing above requirements, the product won’t compute correct results.
+
+
+\section{Appendix A: Glossary}
+\begin{enumerate}
+\item[•] GNU-GPL: GNU General Public License is a widely used free software license which guarantees end users the freedom to run, study, share and modify their software.
+
+\item[•] Android (stylized as android) is a mobile operating system developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets.
+
+\item[•] Machine learning is the subfield of computer science that gives computers the ability to learn without being explicitly programmed.
+
+\item[•] OpenCV (Open Source Computer Vision) is a library of programming functions mainly aimed at real-time computer vision.
+
+\item[•] OpenGL (Open Graphics Library) is a cross-language, cross-platform application programming interface (API) for rendering 2D and 3D vector graphics.
+
+\item[•] Android Studio(SDK) includes comprehensive set of development tools. It includes a debugger, libraries, a handset emulator based on QEMU, documentation, sample code and tutorials.
+\end{enumerate}
+
+
+
+\end{document}
