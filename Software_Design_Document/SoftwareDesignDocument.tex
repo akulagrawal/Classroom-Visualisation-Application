@@ -1,0 +1,1122 @@
+\documentclass{scrreprt}
+\setcounter{secnumdepth}{5}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[pass,letterpaper]{geometry}
+\graphicspath{{Pictures/}}
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Software Requirement Specification},    % title
+    pdfauthor={Akul Agrawal, Sujoy Ghosh, Mitansh Jain},                     % author
+    pdfsubject={TeX and LaTeX},                        % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=all            % only page is linked
+}                                          %
+\def\myversion{1.0 }
+\date{}
+\title{}
+\begin{document}
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{CS-223\\SOFTWARE DESIGN\\ DOCUMENT}\\
+        \vspace{1.5cm}
+        for\\
+        \vspace{1.5cm}
+        Project 7\\
+        Classroom Visualisation App-1\\
+        
+        \vspace{1.9cm}
+        \LARGE{Prepared by: }\\
+        Group-12\\
+        Mitansh Jain - 160101042\\
+        Sujoy Ghosh - 160101073\\
+        Akul Agrawal - 160101085\\
+        \vspace{1.9cm}
+        \today\\
+    \end{bfseries}
+\end{flushright}
+\tableofcontents
+% \listoffigures
+\listoftables
+\chapter{Introduction}
+
+\section{Purpose}
+The purpose of this document is to give a detailed description of the
+design for the Classroom Visualization App software. This includes use
+case models, sequence diagrams, class diagrams and other supporting
+information. It will illustrate the complete declaration for the
+development of system along with the system constraints. This document
+is primarily intended to as a reference for developing the first version
+of the system for the development team.
+
+\section{Document Conventions}
+\begin{table}[h]
+\centering
+\label{label-1}
+\begin{tabular}{|l|l|lll}
+\cline{1-2}
+Term      & Definition                                                   &  &  &  \\ \cline{1-2}
+Professor & Person who shall be using the software for monitoring        &  &  &  \\ \cline{1-2}
+Student   & Person who shall be monitored by the instructor              &  &  &  \\ \cline{1-2}
+Users     & Collectively refers to the professors or teaching assistants &  &  &  \\ \cline{1-2}
+Device     & An electronic device using which the instructor is delivering their lecture &  &  &  \\ \cline{1-2}
+Android     & A mobile operating system developed by Google &  &  &  \\ \cline{1-2}
+Google     & An American multinational technology company &  &  &  \\ \cline{1-2}
+IDE     & Integrated Development Environment &  &  &  \\ \cline{1-2}
+OpenCV     & Open Source Computer Vision Library &  &  &  \\ \cline{1-2}
+\end{tabular}
+\caption{Document Conventions}
+\end{table}
+
+\section{Project Scope}
+The purpose of this project is to create convenient and easy-to-use android app for users.
+This app will enable professors to recognise the students present in the class and map
+them to their assigned states and augment a bounding box of particular color. The
+architecture of the app will allow it to be compatible to additional functionality for
+dynamic state allocation.
+The system is based on computer vision. Above all, we hope to provide a comfortable
+user experience along with best results.
+
+\chapter{Design Overview}
+\section{Introduction}
+The Design Overview is the section to introduce and give a brief overview of the design. The System Architecture is a way to give the overall view of a system and to place it into context with external systems. This allows for the reader and user of the document to orient themselves to the design and see a summary before proceeding to the details of the design.
+\section{Background}
+This software will be a convenient and easy-to-use android application for the professors.
+This application will enable professors to recognize the students present in the class and map them to their assigned states, while augmenting a bounding box of particular color around their faces in real time. The
+architecture of the app will allow it to be compatible to additional functionality for
+dynamic state allocation.
+\section{System Architecture}
+The use case environment consists of a professor delivering lecture in a class. The professor is expected to add each student attending the lecture to the application database prior to the beginning of the lecture. He/She just switches on the application and opens the camera view facing the class. The professor is notified about the current states of the students in real-time with his/her corresponding roll number.
+
+\section{System Interfaces and Implementing Technologies}
+\subsection{User Interfaces}
+The user interface will allow the professor to login. He would be able to add, edit and delete students attending his/her lecture. He will get the real-time statistics of the attention of the students.
+\subsection{Software Interfaces}
+The data collected will be stored in a relational MySQL database.
+The application will be written in Android Studio IDE and OpenCV package will be used to process images and recognize faces of the students.
+\section{Design and Implementation Constraints}
+For the above purpose of implementing the app, we are forbidden from using the camera
+for measuring the states of the students. The students might portray themselves as paying attention even when they are not.
+
+\section{Assumptions and Dependencies}
+We assume that the device owned by the professor will be based on the
+Android Operating System.
+One assumption about the product is that it can always be used on mobile phone having good enough performance and camera. If the phone does not have enough hardware resources
+available for the application, for example the users might have allocated them with other
+applications, there may be scenarios where the application does not work as intended
+or even at all.
+
+\chapter{Use Cases}
+\section{U1: Sign Up}
+\begin{itemize}
+\item[•]
+\textbf{Actors:} Professor
+\item[•] \textbf{Precondition :} The user should not have signed up already.
+\item[•]
+\textbf{Scenario 1:} Mainline Sequence:
+\begin{itemize}
+  \item [] \textbf{1. Professor:} Requests the register page.
+  \item [] \textbf{2. System:} Prompts to enter details.
+  \item [] \textbf{3. Professor:} Enters the details i.e. username and password.
+  \item [] \textbf{4. System:} Displays acknowledgement for successful registration.
+\end{itemize}
+\item[•]
+\textbf{Scenario 2:} At step 4 in mainline:
+\begin{itemize}
+  \item [] \textbf{4. System:} Displays error in case any required input field is empty and prompts to enter those details.
+\end{itemize}
+\end{itemize}
+
+\section{U2: Log In}
+\begin{itemize}
+\item[•]
+\textbf{Actors:} Professor
+\item[•] \textbf{Precondition :} The user must have signed up already.
+\item[•]
+\textbf{Scenario 1:} Mainline Sequence:
+\begin{itemize}
+  \item [] \textbf{1. Professor:} Requests the login page.
+  \item [] \textbf{2. System:} Prompts to enter username and password.
+  \item [] \textbf{3. Professor:} Enters the creadentials i.e. username and password.
+  \item [] \textbf{4. System:} Displays login acknowledgement and available options.
+  \end{itemize}
+\item[•]
+\textbf{Scenario 2:} At step 4 in mainline:
+\begin{itemize}
+  \item [] \textbf{4. System:} Displays error in case any required input field is left empty and prompts to enter those details.
+  \end{itemize}
+\item[•]
+\textbf{Scenario 3:} At step 4 in mainline:
+\begin{itemize}
+  \item [] \textbf{4. System:} Displays error in case of invalid credentials.
+  \end{itemize}
+\end{itemize}
+
+\section{U3: Add Student Record}
+\begin{itemize}
+\item [•] \textbf{Actors :} Professor
+\item[•] \textbf{Precondition :} The user must have logged in with his credentials.
+\item [•] \textbf{Scenario 1 :} Mainline Sequence:
+\begin{itemize}
+\item [] \textbf{1. Professor :} Selects 'Add Student' option.
+\item [] \textbf{2. System :} Displays prompt to enter student details including name, roll number and course ID.
+\item [] \textbf{3. Professor :} Enters the required values and selects 'Next' option.
+\item [] \textbf{4. System :} Prompts user to add 20 images of the new student from camera.
+\item [] \textbf{5. Professor :} Adds the required number of images of the new student.
+\item [] \textbf{6. System :} Displays acknowledgement message for addition of new student.
+\end{itemize}
+\item [•] \textbf{Scenario 2 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if the student is already present.
+\end{itemize}
+\item [•] \textbf{Scenario 3 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if some of the required data has not been entered and prompts to enter those data.
+\end{itemize}
+\item [•] \textbf{Scenario 4 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if entered data(Roll number and/or course Id) is not valid.
+\end{itemize}
+\end{itemize}
+
+
+\section{U4: Edit Student Record}
+\begin{itemize}
+\item [•] \textbf{Actors :} Professor
+\item[•] \textbf{Precondition :} The user must have logged in with his credentials.
+\item [•] \textbf{Scenario 1 :} Mainline Sequence:
+\begin{itemize}
+\item [] \textbf{1. Professor :} Selects 'Update Student Records' option.
+\item [] \textbf{2. System :} Displays prompt to enter student's roll number.
+\item [] \textbf{3. Professor :} Enters the required value and selects 'next'
+\item [] \textbf{4. System :} Prompts user to enter new details of the student.
+\item [] \textbf{5. Professor :} Enters the new details of the student and selects 'Complete Editing' option.
+\item [] \textbf{6. System :} Displays acknowledgement message for successful editing of student's data.
+\end{itemize}
+\item [•] \textbf{Scenario 2 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if the student's roll number is absent in database or invalid.
+\end{itemize}
+\item [•] \textbf{Scenario 3 :} At step 6 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{6. System :} Displays error if entered data is not valid.
+\end{itemize}
+\item [•] \textbf{Scenario 4 :} At step 6 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{6. System :} Prompts user to capture 20 photos of the student.
+\item [] \textbf{7. Professor :} Captures the required number of images.
+\item [] \textbf{8. System :} Displays acknowledgement message for successful editing of student's data.
+\end{itemize}
+\end{itemize}
+
+
+\section{U5: Delete Student Record}
+\begin{itemize}
+\item [•] \textbf{Actors :} Professor
+\item[•] \textbf{Precondition :} The user must have logged in with his credentials.
+\item [•] \textbf{Scenario 1 :} Mainline Sequence:
+\begin{itemize}
+\item [] \textbf{1. Professor :} Selects 'Delete Student' option.
+\item [] \textbf{2. System :} Displays prompt to enter the roll number of student to be deleted.
+\item [] \textbf{3. Professor :} Enters the roll number of the student to be deleted.
+\item [] \textbf{4. System :} Displays acknowledgement message regarding deletion of the student.
+\end{itemize}
+\item [•] \textbf{Scenario 2 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if the student's roll number is absent in the database or invalid.
+\end{itemize}
+\end{itemize}
+
+
+\section{U6: View Student Record}
+\begin{itemize}
+\item [•] \textbf{Actors :} Professor
+\item[•] \textbf{Precondition :} The user must have logged in with his credentials. 
+\item [•] \textbf{Scenario 1 :} Mainline Sequence:
+\begin{itemize}
+\item [] \textbf{1. Professor :} Selects 'View Student Record' option.
+\item [] \textbf{2. System :} Displays prompt to enter course ID.
+\item [] \textbf{3. Professor :} Enters the required value.
+\item [] \textbf{4. System :} Displays list of students enrolled in the given course ID along with their roll numbers. 
+\end{itemize}
+\item [•] \textbf{Scenario 2 :} At step 4 of mainline sequence:
+\begin{itemize}
+\item [] \textbf{4. System :} Displays error if the requested 'Course ID' is invalid/absent in database.
+\end{itemize}
+\end{itemize}
+
+
+\section{U7: Initiate Camera Session}
+\begin{itemize}
+\item [•] \textbf{Actors :} Professor
+\item[•] \textbf{Precondition :} The user must have logged in with his credentials.
+\item [•] \textbf{Scenario 1 :} Mainline Sequence:
+\begin{itemize}
+\item [] \textbf{1. Professor :} Selects 'Camera View' option.
+\item [] \textbf{2. System :} Initiates the rear camera view.
+\item [] \textbf{3. Professor :} Selects the 'Start' option.
+\item [] \textbf{4. System :} Displays bounding box (coloured according to the allocated state) around the recognized faces.
+\end{itemize}
+\end{itemize}
+
+
+\chapter{Object Oriented Model}
+\section{Domain Modeling}
+\subsection{U1 SignUp:}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item UserDB
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item SignUpController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item SignUpBoundary
+\end{enumerate}
+\subsection{U2 Login:}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item UserDB
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item LogInController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item LogInBoundary
+\end{enumerate}
+\subsection{U3 Add Student Records:}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item StudentRecords
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item AddStudentController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item AddStudentBoundary
+\end{enumerate}
+\subsection{U4 Edit Student Records:}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item StudentRecords
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item EditStudentController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item EditStudentBoundary
+\end{enumerate}
+\subsection{U5 Delete Student Records}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item StudentRecords
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item DeleteStudentController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item DeleteStudentBoundary
+\end{enumerate}
+\subsection{U7 View Student Records}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item StudentRecords
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item ViewStudentController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item ViewStudentBoundary
+\end{enumerate}
+\subsection{U7 Inititate Camera Session}
+\subsubsection{Entity Objects}
+\begin{enumerate}
+  \item StudentRecords
+\end{enumerate}
+\subsubsection{Controller Objects}
+\begin{enumerate}
+  \item CameraViewController
+\end{enumerate}
+\subsubsection{Boundary Objects}
+\begin{enumerate}
+  \item CameraView
+\end{enumerate}
+
+\section{Class Description}
+
+\subsection{SignUpBoundary: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class handles the user interface for SignUp form.
+\item[] \textbf{Attributes:} 
+\begin{itemize}
+\item [•] Username: string
+\item [•] EmailID: string
+\item [•] Password: string
+\item [•] isValid: integer
+\end{itemize}
+\textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Void 
+\item [] \textbf{Return Value:} Form window instance
+\item [] \textbf{Description:} This method loads the signup window onto screen.
+\item [] \textbf{Called by:} This method is called by ClickEventListener() of Signup button.
+\item [] \textbf{Calls:} void
+\end{itemize}
+
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+
+\item [•] \textbf{FormSubmit()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, EmailID, Password
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method accepts the input from the signup window and passes on for validation process.
+\item [] \textbf{Called by:} Method is called by 'Submit' ClickEventListener() Handler.
+\item [] \textbf{Calls:} Method calls ValidateFormData() from SignUpController object and then calls DisplayMessage() method.
+\end{itemize}
+\item [•] \textbf{DisplayMessage()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Truth value of isValid parameter.
+\item [] \textbf{Return Value:} Displays the Confirmation message or Error message depending upon value of isValid. 
+\item [] \textbf{Description:} This method checks the value of isValid parameter and displays corresponding message onto the screen. If isValid = 1, then confirmation message is displayed. If isValid = 0, then "Incomplete Form" error will be displayed. If isValid = -1, then "Data not valid" is displayed
+\item [] \textbf{Called by:} Method is called by FormSubmit(). 
+\item [] \textbf{Calls:} This function makes no further calls.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{SignUpController}
+\begin{enumerate}
+\item[] \textbf{Description:} This class checks the validity of data entered by the Professor in the Sign Up Form and creates a new user in the database with the input data.
+\item [] \textbf{Methods:} 
+\begin{itemize}
+\item [•] \textbf{ValidateFormData()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, EmailID, Password  
+\item [] \textbf{Return Value:} isValid value
+\item [] \textbf{Description:} This method checks if all the input parameters are non-empty and all data are as per required format (e.g. email-id should be valid).
+\item [] \textbf{Called by:} Method called be FormSubmit() method of SignUpBoundary object.
+\item [] \textbf{Calls:} It calls CreateUser() of UserDB object if input data is valid.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+
+\subsection{LoginBoundary: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class handles the user interface for Login.
+\item[] \textbf{Attributes:} 
+\begin{itemize}
+\item [•] Username: string
+\item [•] Password: string
+\end{itemize}
+\textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Void 
+\item [] \textbf{Return Value:} Form window instance
+\item [] \textbf{Description:} This method loads the Add Student window on the screen.
+\item [] \textbf{Called by:} This method is called by ClickEventListener() of Login button.
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+\item [•] \textbf{FormSubmit()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, Password
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method accepts the input from the login window and passes on for validation process.
+\item [] \textbf{Called by:} Method is called by 'Submit' ClickEventListener() Handler.
+\item [] \textbf{Calls:} Method calls ValidateFormData() from LogInController object and then calls DisplayMessage() method.
+\end{itemize}
+\item [•] \textbf{DisplayMessage()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Truth value of isValid parameter.
+\item [] \textbf{Return Value:} Displays the Confirmation message or Error message depending upon value of isValid. 
+\item [] \textbf{Description:} This method checks the value of isValid parameter and displays corresponding message onto the screen.
+\item [] \textbf{Called by:} Method is called by FormSubmit()
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{LoginController: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class checks the validity of the credentials entered by the user and allows access to the main portal if they are valid.
+\item[] \textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{ValidateFormData()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, Password
+\item [] \textbf{Return Value:} IsValid
+\item [] \textbf{Description:} This method accepts the username and password entered by the user and checks if the details are valid.
+\item [] \textbf{Called by:} It is called after Form Submission FormSubmit().
+\item [] \textbf{Calls:} Verify() function of UserDB
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{UserDB:}
+\begin{enumerate}
+\item[] \textbf{Description:} This class helps to verify the credentials entered by the professor and create a new student entry in database.
+\item[] \textbf{Attributes:}
+\begin{itemize}
+\item [•] Username: string
+\item [•] Password: string
+\item [•] Email: string
+\end{itemize}
+\item[] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{CreateUser()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, Password, Email  
+\item [] \textbf{Return Value:} void 
+\item [] \textbf{Description:} This method stores the values of user credentials.
+\item [] \textbf{Called by:} Method is called by ValidateFormData() of SignUp class if data provided is valid
+\item [] \textbf{Calls:} This method has no further calls.
+\end{itemize}
+
+\item [•] \textbf{Verify()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Username, Password.
+\item [] \textbf{Return Value:} Boolean value that is true if user credentials matches with the correct user credentials, else displays false.
+\item [] \textbf{Description:} This method checks the parameter password with the correct password of the username.
+\item [] \textbf{Called by:} Method is called by ValidateFormData() of Login class
+\item [] \textbf{Calls:}
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{AddStudentBoundary: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class handles add student form and interaction with user.
+\item[] \textbf{Attributes:}
+\begin{itemize}
+\item [•] StudentName: string
+\item [•] StudentRollNo: string
+\item [•] StudentCourse: string
+\end{itemize}
+\item[]\textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Void 
+\item [] \textbf{Return Value:} Form window instance
+\item [] \textbf{Description:} This method loads the Add Student window on the screen.
+\item [] \textbf{Called by:} This method is called by ClickEventListener() of Login button.
+\item [] \textbf{Calls:} Method calls FormSubmit() method
+\end{itemize}
+
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+
+\item [•] \textbf{FormSubmit()}
+\begin{itemize}
+\item [] \textbf{Parameters:} StudentName, StudentRollNo, StudentCourse
+\item [] \textbf{Return Value:} Void
+\item [] \textbf{Description:} This method accepts the input from the login window and passes on for validation process.
+\item [] \textbf{Called by:} Method is called by ClickEventListener() on clicking form submit button. 
+\item [] \textbf{Calls:} Method calls ValidateFormData() method and then calls DisplayMessage().
+\end{itemize}
+\item [•] \textbf{DisplayMessage()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Truth value of isValid parameter.
+\item [] \textbf{Return Value:} Displays the Confirmation message or Error message depending upon value of isValid. 
+\item [] \textbf{Description:} This method checks the value of isValid parameter and displays corresponding message onto the screen.
+\item [] \textbf{Called by:} Method is called by FormSubmit()
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{AddStudentController: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class is responsible for the control of AddStudent process.
+\item[]\textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{ValidateFormData()}
+\begin{itemize}
+\item [] \textbf{Parameters:} AddStudentFormData
+\item [] \textbf{Return Value:} IsValid
+\item [] \textbf{Description:} This method checks if the data entered by the user is valid.
+\item [] \textbf{Called by:} FormSubmit()
+\item [] \textbf{Calls:} OpenCameraView() if the form is valid(i.e. IsValid=1).
+\end{itemize}
+\item [•] \textbf{OpenCameraView()}
+\begin{itemize}
+\item [] \textbf{Parameters:} SwitchSignal(i.e. camera on/off command)
+\item [] \textbf{Return Value:} CameraView
+\item [] \textbf{Description:} This method switches on the camera view to take photographs depending on the SwitchSignal
+\item [] \textbf{Called by:} Method is called by ValidateFormData()
+\item [] \textbf{Calls:} SwitchCamera()
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{CameraView: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class controls the Camera and returns boolean truth value when user has taken sufficient(20) images.
+\item[] \textbf{Attributes:} 
+\begin{itemize}
+\item [•] SwitchSignal: Boolean
+\item[•] ImageCounter: Integer
+\end{itemize}
+\item[] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{SwitchCamera()}
+\begin{itemize}
+\item [] \textbf{Parameters:} SwitchSignal
+\item [] \textbf{Return Value:} ImageNum
+\item [] \textbf{Description:} This method switches on the camera whenever the SwitchSignal is one and counts number of images taken by the user
+\item [] \textbf{Called by:} OpenCameraView()
+\item [] \textbf{Calls:} CheckImageNum()
+\end{itemize}
+\item [•] \textbf{CheckImageNum()}
+\begin{itemize}
+\item [] \textbf{Parameters:} ImageNum
+\item [] \textbf{Return Value:} IsValid
+\item [] \textbf{Description:} This method takes number of images clicked by the user as input and checks if it satisfies the minimum requirement of 20 images.
+\item [] \textbf{Called by:} Method is called by SwitchCamera()
+\item [] \textbf{Calls:} AddStudentList() when sufficient number of images(20) has ben captured
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{StudentRecords: }
+\begin{enumerate}
+\item[] \textbf{Description:} This class maintains the database of students, their details and images.
+\item[] \textbf{Attributes:}
+\begin{itemize}
+\item [•] StudentName: String
+\item [•] StudentRollNumber: Integer
+\item [•] CourseID: string
+\item [•] ImageList[]: Images
+\item [•] StudentList[] : [StudentName:string, StudentRollNumber:integer, CourseID:string , ImageList[]:images] 
+\end{itemize}
+\item[]
+\textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{AddStudentList()}
+\begin{itemize}
+\item [] \textbf{Parameters:} StudentData i.e StudentName, StudentRollNumber and CourseID.
+\item [] \textbf{Return Value:} boolean True if data is successfully addded, else it is False.
+\item [] \textbf{Description:} This method checks if the input RollNo is already present in the list of added students. If not, it creates a new student in StudentList and saves his data in StudentRecord. Status of success is returned.
+\item [] \textbf{Called by:} CheckImageNum()
+\item [] \textbf{Calls:} CheckRollNo()
+\end{itemize}
+\item [•] \textbf{CheckRollNo()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} RollNo
+\item [] \textbf{Return Value:} boolean True if roll number is present in the list, else it is False.
+\item [] \textbf{Description:} This method checks if the input RollNo is already present in the list of added students.
+\item [] \textbf{Called by:} AddStudentList() from AddStudentController and ValidateRollNumber() from EditStudentController and DeleteStudentController
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{EditDetails()}
+\begin{itemize}
+\item [] \textbf{Parameters:} StudentRollNumber, StudentName and CourseID
+\item [] \textbf{Return Value:} Confirmation message
+\item [] \textbf{Description:} This method updates the values of the student corresponding to the given roll number.
+\item [] \textbf{Called by:} ValidateData()
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{StoreImage()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} StudentRollNumber and list of images
+\item [] \textbf{Return Value:} Confirmation message
+\item [] \textbf{Description:} This method updates the training images of the student corresponding to the given roll number.
+\item [] \textbf{Called by:} CheckImgNum()
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{DeleteRecord()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} StudentRollNumber
+\item [] \textbf{Return Value:} Confirmation message
+\item [] \textbf{Description:} This method deletes the values of the student corresponding to the given roll number.
+\item [] \textbf{Called by:} ValidateRollNumber()
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{GetStudentsList()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} CourseID
+\item [] \textbf{Return Value:} List of students registered in the course.
+\item [] \textbf{Description:} This method returns the list of students registered in the given course.
+\item [] \textbf{Called by:} RequestStudentRecords()
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{MatchFaceFeatures()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} FeatureMatrix[]
+\item [] \textbf{Return Value:} list of students matched with the features.
+\item [] \textbf{Description:} This method checks the StudentsList and returns the list of students matched with the features.
+\item [] \textbf{Called by:} FeatureExtraction()
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{GetState()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} StudentRollNumber
+\item [] \textbf{Return Value:} StateValue
+\item [] \textbf{Description:} This method checks the StudentsList and returns the StateValue corresponding to given StudentRollNumber.
+\item [] \textbf{Called by:} AugmentBoundingBox() 
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+
+\item [•] \textbf{SetState()}
+\begin{itemize}	
+\item [] \textbf{Parameters:} List containing student roll number and the corresponding state value. StudentState[] : array of [StudentRollNumber, StateValue].
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method updates the states of the student according to the input list.
+\item [] \textbf{Called by:} Method is called by Generate().
+\item [] \textbf{Calls:} No further calls
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{EditStudentBoundary:}
+\begin{enumerate}
+\item[] \textbf{Description:} This class helps to edit student details such as student name and course name.
+\item[] \textbf{Attribute:} 
+\begin{itemize}
+\item [•] isValidRollNumber : integer
+\item [•] isValidInput : boolean
+\end{itemize}
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} void
+\item [] \textbf{Return Value:} Form window instance.
+\item [] \textbf{Description:} This method loads the edit student windown onto screen.
+\item [] \textbf{Called by:} Method is called by ClickEventListener() Handler of Edit Student button.
+\item [] \textbf{Calls:} This method doesn't make any further calls.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{InputRollNumber()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Roll number of the student. 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method takes the roll number as input whose details are to be editted.
+\item [] \textbf{Called by:} Method is called by ClickEventListener() Handler of Submit button.
+\item [] \textbf{Calls:} It calls ValidateRollNumber() of EditStudentController object to validate the data and then calls either DisplayError() or EditDetailsInput() based on the value of isValidRollNumber.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{EditDetailsInput()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Student name and course ID.
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method takes the new student name and course id as input and makes changes corresponding to the roll number in database.
+\item [] \textbf{Called by:} Method is called by InputRollNumber().
+\item [] \textbf{Calls:} This method calls the ValidateData() of EditStudentController object. It then calls DisplayConfirmation() or DisplayError() function based on the value of isValidRollNumber.
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item [•] \textbf{DisplayError()}
+\begin{itemize}
+\item [] \textbf{Parameters:} void 
+\item [] \textbf{Return Value:} Error message based on the value of isValidRollNumber and isValidInput.
+\item [] \textbf{Description:} This methods displays error message based on the value of isValidRollNumber. If isValidRollNumber = -1, then 'Roll number doesn't exist' message is displayed. If isValidRollNumber = 0, then 'Incomplete form is displayed'. If isValidInput = 0, then 'Invalid Form' is displayed.
+\item [] \textbf{Called by:} Called either by inputRollNumber() or EditDetailsInput() based on various scenarios as discussed.
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{DisplayConfirmation()}
+\begin{itemize}
+\item [] \textbf{Parameters:} void
+\item [] \textbf{Return Value:} Confirmation message
+\item [] \textbf{Description:} This methods displays confirmation message indicating successful completion of editing.
+\item [] \textbf{Called by:} Method is called by EditDetailsInput()
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{EditStudentController:}
+\begin{enumerate}
+\item[] \textbf{Description :}This class helps to validate roll number and helps to edit student details such as student name and course name.
+\item[] \textbf{Attribute :} 
+\begin{itemize}
+\item [•] rollNumber : integer
+\item [•] isDataValid : boolean
+\item [•] isFormValid : boolean
+\end{itemize}
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{ValidateRollNumber()}
+\begin{itemize}
+\item [] \textbf{Parameters :} rollNumber
+\item [] \textbf{Return Value :} isDataValid
+\item [] \textbf{Description :} This function checks the validity of entered roll number and asks for the presence of roll number in the students' list. If roll number is present, then isDataValid = 1, else isDataValid = 0.
+\item [] \textbf{Called by :} Method is called by InputRollNumber()
+\item [] \textbf{Calls :} It calls CheckRollNo() method of StudentList object.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{ValidateData()}
+\begin{itemize}
+\item [] \textbf{Parameters :} StudentName and CourseID
+\item [] \textbf{Return Value :} isFormValid
+\item [] \textbf{Description :} This function checks the validity of entered details of the student. If all entries are valid (i.e. course ID belongs to what the professor teaches,etc) , then isFormValid = 1, else isFormValid = 0. 
+\item [] \textbf{Called by :} Method is called by EditDetailsInput().
+\item [] \textbf{Calls :} If isFormValid = 1, then it calls SwitchSignal() asking if the user wants to add new training images. It then calls EditDetails() of StudentList object.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{DeleteStudentBoundary}
+\begin{enumerate}
+\item[] \textbf{Description:} This class helps to delete student details given the roll number.
+\item[] \textbf{Attribute:} 
+\begin{itemize}
+\item [•] isValidRollNumber : integer
+\item [•] isValidInput : boolean
+\end{itemize}
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Void
+\item [] \textbf{Return Value:} Form window instance.
+\item [] \textbf{Description:} This method loads the delete student windown onto screen.
+\item [] \textbf{Called by:} Method is called by ClickEventListener() Handler of Edit Student button.
+\item [] \textbf{Calls:} This method doesn't make any further calls.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{InputRollNumber()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Roll number of the student. 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method takes the roll number as input whose details are to be editted.
+\item [] \textbf{Called by:} Method is called by ClickEventListener() Handler of Submit button.
+\item [] \textbf{Calls:} It calls ValidateRollNumber() of DeleteStudentController object to validate the data and then calls either DisplayError() or DisplayConfirmation() based on the value of isValidRollNumber and isValidInput.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{DisplayError()}
+\begin{itemize}
+\item [] \textbf{Parameters:} void 
+\item [] \textbf{Return Value:} Error message based on the value of isValidRollNumber and isValidInput.
+\item [] \textbf{Description:} This methods displays error message based on the value of isValidRollNumber. If isValidRollNumber = 0, then 'Roll number doesn't exist' message is displayed. If isValidInput = 0, then 'Invalid Form' is displayed.
+\item [] \textbf{Called by:} Called by InputRollNumber() depending upon isValidInput and isValidRollNumber values.
+\item [] \textbf{Calls:} Display module of window screen.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{DisplayConfirmation()}
+\begin{itemize}
+\item [] \textbf{Parameters:} void
+\item [] \textbf{Return Value:} Confirmation message
+\item [] \textbf{Description:} This methods displays confirmation message indicating successful completion of editing.
+\item [] \textbf{Called by:} Method is called by InputRollNumber() depending upon isValidInput and isValidRollNumber values.
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{DeleteStudentController}
+\begin{enumerate}
+\item[] \textbf{Description :}This class helps to validate roll number and helps to delete student details having given roll number.
+\item[] \textbf{Attribute :} 
+\begin{itemize}
+\item [•] isDataValid : boolean
+\item [•] isFormValid : boolean
+\end{itemize}
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{ValidateRollNumber()}
+\begin{itemize}
+\item [] \textbf{Parameters :} rollNumber
+\item [] \textbf{Return Value :} isDataValid
+\item [] \textbf{Description :} This function checks the validity of entered roll number and asks for the presence of roll number in the students' list. If roll number is present, then isDataValid = 1, else isDataValid = 0.
+\item [] \textbf{Called by :} Method is called by InputRollNumber()
+\item [] \textbf{Calls :} It calls CheckRollNo() method of StudentList object and if roll number is present it further calls DeleteRecord() of StudentRecords class.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{ViewRecordBoundary}
+\begin{enumerate}
+\item[] \textbf{Description :}This shows the requested student records from database 
+\item[] \textbf{Attribute :}
+\begin{itemize}
+\item[•] listOfStudent[Name, RollNumber, lastState] : [string, integer, integer]
+\end{itemize}
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{Constuctor()}
+\begin{itemize}
+\item [] \textbf{Parameters :}  CourseID
+\item [] \textbf{Return Value :} void
+\item [] \textbf{Description :} This function builds the instantiates the screen for viewing student records.
+\item [] \textbf{Called by :} clickEventListener() of button clicked by user for viewing records.
+\item [] \textbf{Calls :} Calls RequestStudentRecords() from ViewRecordController.
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{ViewRecordController}
+\begin{enumerate}
+\item[] \textbf{Description :} Gets all student records from database.
+\item [] \textbf{Methods:}
+\begin{itemize}
+\item [•] \textbf{RequestStudentRecords()}
+\begin{itemize}
+\item [] \textbf{Parameters :} void
+\item [] \textbf{Return Value :} Student Records
+\item [] \textbf{Description :} Request student records from studentList.
+\item [] \textbf{Called by :} Constructor() calls just after initiation of screen.
+\item [] \textbf{Calls :} calls GetStudentList() from studentList. 
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+
+\subsection{CameraSessionBoundary:}
+\begin{enumerate}
+\item[] \textbf{Description:} This class handles the view from camera and augmentation of bounding box to identified students.
+\item[] \textbf{Attribute}
+\begin{itemize}
+\item [•]rearCameraView : mp4
+\end{itemize}
+\item[] \textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{Constructor()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Void 
+\item [] \textbf{Return Value:} Camera Instance
+\item [] \textbf{Description:} This function starts rear camera instance. 
+\item [] \textbf{Called by:} This is called by ClickEventListener() handler of the button clicked by user.  
+\item [] \textbf{Calls:} ConvertVideoType() method of CameraSessionController.
+\end{itemize}
+\item [•] \textbf{ClickEventListener()}
+\begin{itemize}
+\item [] \textbf{Parameters:} buttonAction, functionName 
+\item [] \textbf{Return Value:} void
+\item [] \textbf{Description:} This method calls the function provided in the parameter's list.
+\item [] \textbf{Called by:} This method is called on click of a button.
+\item [] \textbf{Calls:} Calls the function provided in the parameter's list.  
+\end{itemize}
+\item [•] \textbf{AugmentBoundingBox()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Coordinates of identified students, their identity, states. 
+\item [] \textbf{Return Value:} Video with augmented bounding box.
+\item [] \textbf{Description:} This method augments bounding box to video according to the states to the face of identified students. 
+\item [] \textbf{Called by:} This is called in sequence after CameraSessionController class after states are obtained from databse.
+\item [] \textbf{Calls:} GetState().
+\end{itemize}
+\begin{table}[h]
+\centering
+\label{label-2}
+\begin{tabular}{|l|l|lll}
+\cline{1-2}
+Term      & Definition                                                   &  &  &  \\ \cline{1-2}
+\color{red}Red & 1 to 4        &  &  &  \\ \cline{1-2}
+\color{blue}Blue & 5 to 7              &  &  &  \\ \cline{1-2}
+\color{green}Green & 8 to 10 &  &  &  \\ \cline{1-2}
+
+\end{tabular}
+\caption{Color Code}
+\end{table}
+
+\end{itemize}
+\end{enumerate}
+
+\subsection{CameraSessionController:}
+\begin{enumerate}
+\item[] \textbf{Description:} This class controls camera session, and converts format of video.
+\item[] \textbf{Attribute}
+\begin{itemize}
+\item [•]imageFramesList[] : 2d Array of integers representing RGB values.
+\end{itemize}
+\item[] \textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{ConvertVideoType()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Rear Camera Video 
+\item [] \textbf{Return Value:} Converted video in OpenCV format.
+\item [] \textbf{Description:} This function converts video into format processble by OpenCV. 
+\item [] \textbf{Called by:} This is called by camera session after it is initiated.  
+\item [] \textbf{Calls:} This further calls FrameGenerator() to obtain discrete image frames for processing.
+\end{itemize}
+
+\end{itemize}
+\end{enumerate}
+
+\subsection{FrameGenerator:}
+\begin{enumerate}
+\item[] \textbf{Description:} This function generates discrete image frames from video.
+\item[] \textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{GenerateFrames()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Video in OpenCV format.
+\item [] \textbf{Return Value:} Discrete Image Frames.
+\item [] \textbf{Description:} This function generates discrete image frames.
+\item [] \textbf{Called by:} This is called by ConvertVideoType() after generation of video.  
+\item [] \textbf{Calls:} calls IdentifyStudents().
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{FaceRecognizer:}
+\begin{enumerate}
+\item[] \textbf{Description:} This recognizes the students present in image frames. 
+\item[] \textbf{Attribute:}
+\begin{itemize}
+\item [•] identifiedStudentsList[Name, RollNumber]:[string, integer]
+\end{itemize}
+\item[] \textbf{Method:}
+\begin{itemize}	
+\item [•] \textbf{IdentifyStudents()}
+\begin{itemize}
+\item [] \textbf{Parameters:} ImageFrame
+\item [] \textbf{Return Value:} List of identified students
+\item [] \textbf{Description:} This function calls to oter functions which preprocess the image frames and identify features.
+\item [] \textbf{Called by:} Called by GenerateFrames().
+\item [] \textbf{Calls:} This calls FaceDetection() function, FeatureExtraction function and matches faces from database.
+\end{itemize}
+
+\item [•] \textbf{FaceDetection()}
+\begin{itemize}
+\item [] \textbf{Parameters:} ImageFrame
+\item [] \textbf{Return Value:} Image frame and coordinates of detected faces based on trained models. 
+\item [] \textbf{Description:} This uses trained models to detects faces.
+\item [] \textbf{Called by:} IdentifyStudents() method
+\item [] \textbf{Calls:} No further calls.
+\end{itemize}
+
+\item [•] \textbf{FeatureExtraction()}
+\begin{itemize}
+\item [] \textbf{Parameters:} Coordinates of detected faces and image frames
+\item [] \textbf{Return Value:} Coordinates and information about extracted face features.
+\item [] \textbf{Description:} This function calls to other functions which preprocess the image frames 
+\item [] \textbf{Called by:} Called by IdentifyStudentMethod.
+\item [] \textbf{Calls:} MatchFaceFeatures()
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{RandomStateGenerator:}
+\begin{enumerate}
+\item[] \textbf{Description:} This function generates randomstates for given set of identified student list.
+\item[] \textbf{Method:}
+\begin{itemize}
+\item [•] \textbf{Generate()}
+\begin{itemize}
+\item [] \textbf{Parameters:} List of identified students.
+\item [] \textbf{Return Value:} Random Numbers
+\item [] \textbf{Description:} This function generates discrete image frames.
+\item [] \textbf{Called by:} This is called by CameraSessionController().
+\item [] \textbf{Calls:} This function calls SetState() function in student List to further set states in database for further augmentation purposes.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\chapter{Sequence Diagram}
+
+
+\chapter{Class Diagram}
+
+\chapter{Non-Functional Requirements}
+
+\section{Performance Requirements}
+\begin{itemize}
+\item[•]
+The program must be able to handle the information of the entire class i.e in full attendance almost 90 students and also individually not be glitch in a given mobile device.
+\item[•] 
+The program must update the real time statistics at a fast enough pace so that the instructor can have a clear view on the current attention of the class.
+\item[•]
+The camera should have a sufficiently high resolution for the student faces to be clear to recognize them.
+\end{itemize}
+
+\section{Security Requirements}
+\begin{itemize}
+\item[•]
+The Application User(i.e. Professor) has to enter his/her username and associated password to enable access to the application and his added students
+\end{itemize}
+
+\end{document}
