@@ -33,7 +33,12 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".CameraActivity" />
+        <activity android:name=".AddStudentActivity" />
+        <activity android:name=".DisplayActivity" />
+        <activity android:name=".DBHelper" />
+        <activity android:name=".EditStudentActivity" />
+        <activity android:name=".DeleteStudentActivity"></activity>
     </application>
 
 </manifest>
