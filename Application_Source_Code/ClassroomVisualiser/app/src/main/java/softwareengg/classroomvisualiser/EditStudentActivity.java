@@ -16,7 +16,7 @@ public class EditStudentActivity extends AppCompatActivity {
     Button button;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_student);
         myDb = new DBHelper(this);
@@ -48,7 +48,7 @@ public class EditStudentActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isUpdate = myDb.updateData(editTextId.getText().toString(),
+                        boolean isUpdate = myDb.updateData(Integer.parseInt( editTextId.getText().toString() ),
                                 editName.getText().toString(),
                                 editSurname.getText().toString(),editCourse.getText().toString());
                         if(isUpdate == true)

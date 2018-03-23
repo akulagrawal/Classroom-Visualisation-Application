@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SURNAME TEXT,COURSE TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY,NAME TEXT,SURNAME TEXT,COURSE TEXT)");
     }
 
     @Override
@@ -35,9 +35,10 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name,String surname,String course) {
+    public boolean insertData(long id,String name,String surname,String course) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1,id);
         contentValues.put(COL_2,name);
         contentValues.put(COL_3,surname);
         contentValues.put(COL_4,course);
@@ -54,14 +55,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateData(String id,String name,String surname,String course) {
+    public boolean updateData(long id,String name,String surname,String course) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,id);
         contentValues.put(COL_2,name);
         contentValues.put(COL_3,surname);
         contentValues.put(COL_4,course);
-        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+        db.update(TABLE_NAME, contentValues, "ID = " +id,null );
         return true;
     }
 

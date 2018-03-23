@@ -49,7 +49,8 @@ public class AddStudentActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isInserted = myDb.insertData(editName.getText().toString(),
+                        boolean isInserted = myDb.insertData(Integer.parseInt( editTextId.getText().toString() ),
+                                editName.getText().toString(),
                                 editSurname.getText().toString(),
                                 editCourse.getText().toString() );
                         if(isInserted == true)
