@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class DeleteStudentActivity extends AppCompatActivity {
 
     DBHelper myDb;
+    DBImgHelper imDb;
     EditText editTextId;
     Button btnDelete;
 
@@ -20,6 +21,7 @@ public class DeleteStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_student);
         myDb = new DBHelper(this);
+        imDb = new DBImgHelper(this);
 
         editTextId = (EditText)findViewById(R.id.editText_id);
         btnDelete= (Button)findViewById(R.id.button_delete);
@@ -30,11 +32,12 @@ public class DeleteStudentActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Integer deletedRows = myDb.deleteData(editTextId.getText().toString());
-                        if(deletedRows > 0)
+                        Integer deletedRows = myDb.deleteData(Integer.parseInt( editTextId.getText().toString() ));
+                        Integer deletedImg = imDb.deleteImg(Integer.parseInt( editTextId.getText().toString() ));
+                        if(deletedRows > 0 && deletedImg > 0)
                             Toast.makeText(DeleteStudentActivity.this,"Data Deleted",Toast.LENGTH_LONG).show();
                         else
-                            Toast.makeText(DeleteStudentActivity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+                            Toast.makeText(DeleteStudentActivity.this,"Data not Deleted Completely",Toast.LENGTH_LONG).show();
                     }
                 }
         );

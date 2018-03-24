@@ -37,6 +37,7 @@ public class MenuActivity extends AppCompatActivity {
     Button btnviewAll;
     Button btnDelete;
     Button btnviewUpdate;
+    Button btndispImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,12 @@ public class MenuActivity extends AppCompatActivity {
         btnviewAll = (Button)findViewById(R.id.button_viewAll);
         btnviewUpdate= (Button)findViewById(R.id.button_edit);
         btnDelete= (Button)findViewById(R.id.button_delete);
+        btndispImg= (Button)findViewById(R.id.button_dispImg);
         AddData();
         viewAll();
         UpdateData();
         DeleteData();
+        DispImg();
     }
     public void DeleteData() {
         btnDelete.setOnClickListener(
@@ -84,6 +87,18 @@ public class MenuActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent myIntent = new Intent(MenuActivity.this,
                                 AddStudentActivity.class);
+                        startActivity(myIntent);
+                    }
+                }
+        );
+    }
+    public void DispImg() {
+        btndispImg.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(MenuActivity.this,
+                                DisplayImageActivity.class);
                         startActivity(myIntent);
                     }
                 }
