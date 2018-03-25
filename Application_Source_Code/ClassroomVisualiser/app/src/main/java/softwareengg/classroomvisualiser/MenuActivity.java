@@ -47,9 +47,9 @@ public class MenuActivity extends AppCompatActivity {
 
         btnAdd = (Button)findViewById(R.id.button_add);
         btnviewAll = (Button)findViewById(R.id.button_viewAll);
-        btnviewUpdate= (Button)findViewById(R.id.button_edit);
-        btnDelete= (Button)findViewById(R.id.button_delete);
-        btndispImg= (Button)findViewById(R.id.button_dispImg);
+        btnviewUpdate = (Button)findViewById(R.id.button_edit);
+        btnDelete = (Button)findViewById(R.id.button_delete);
+        btndispImg = (Button)findViewById(R.id.button_dispImg);
         AddData();
         viewAll();
         UpdateData();
