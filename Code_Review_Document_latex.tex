@@ -1,0 +1,220 @@
+\documentclass{scrreprt}
+\setcounter{secnumdepth}{5}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[pass,letterpaper]{geometry}
+\graphicspath{{Pictures/}}
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Software Requirement Specification},    % title
+    pdfauthor={Akul Agrawal, Sujoy Ghosh, Mitansh Jain},                     % author
+    pdfsubject={TeX and LaTeX},                        % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=all            % only page is linked
+}                                          %
+\def\myversion{1.0 }
+\date{}
+\title{}
+\begin{document}
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{CS-223\\CODE REVIEW\\ DOCUMENT\\}
+        \vspace{1.5cm}
+        for\\
+        \vspace{1.5cm}
+        Project 7\\
+        Classroom Visualisation App-1\\
+        
+        \vspace{1.9cm}
+        \LARGE{Prepared by: }\\
+        Group-12\\
+        Mitansh Jain - 160101042\\
+        Sujoy Ghosh - 160101073\\
+        Akul Agrawal - 160101085\\
+        \vspace{1.9cm}
+        \today\\
+    \end{bfseries}
+\end{flushright}
+\tableofcontents
+% \listoffigures
+%\listoftables
+
+\chapter{Introduction}
+The intent of a code review is to catch bugs/issues/defects before the
+offending code is deployed to a production environment and to transfer
+knowledge of implementation details to the rest of the team. Code
+review involves a slow code inspection phase to check errors.
+
+\section{Goals}
+The main reasons for performing code review is to :
+\begin{itemize}
+\item[•] Finding bugs, since bug finding in code review are easier to find and fix, than later in testing.
+\item[•] Adherence to coding conventions
+\item[•] Improving code quality and understandability
+\item[•] Increasing efficiency, by finding trivial programming errors like data resource wastage or use of uninitialized variables.
+\end{itemize}
+\section{Code Inspection}
+The aim of code inspection is to discover some common types of errors caused due to oversight and improper programming practice. In this phase, team
+members are selected and asked to perform the inspection, in which we check the coding standards. Then, we look for the presence of certain kinds of errors like modifying a formal parameter while the routine calls a constant parameter. Considering the statistics some common
+programming errors which are to be checked are :
+\begin{itemize}
+\item[•] Use of uninitialized variables
+\item[•] Jumps into loops
+\item[•] Improper storage allocation and deallocation
+\item[•] Incompatible assignments
+\item[•] Non terminating loops
+\item[•] Array indices out of bounds
+\item[•] Mismatches between actual and formal parameter in procedure calls
+\item[•] Use of incorrect logical operators or incorrect precedence among operators
+\item[•] Improper modification of loop variables
+\item[•] Comparison of equality of floating point variables
+\end{itemize}
+
+All these are checked and reported. It is important to note that code inspection is
+a slow phase and no more than 400 lines of code are to be checked at a
+time. The report is then given to the author for appropriate changes to be
+done.
+\chapter{Coding Guidelines/Task Description}
+\begin{itemize}
+\item[•] Declaration of Global Constant Variables should be done in All Caps and separated by an underscore.
+\item[•] For variable naming CamelCase is used.
+\item[•] Local variables are named all small.
+\item[•] Class names start with capital letters and separated by
+underscore.
+\item[•] Function and function parameter naming is done in lowerCamelCase.
+\item[•] \textbf{OTBF} indentation style is used for curly braces.
+\item[•] Single tab indentation is used.
+\item[•] Variables are to be named meaningfully.
+\item[•] Headers are absolutely necessary in each module.
+\item[•] Comments are required for each function.
+\item[•] On an average four lines of code should have a single line of
+comment.
+\item[•] At most 6 public Global variables can be used in a module.
+\item[•] Do not use a coding style that is too clever or too difficult to understand.
+\item[•] Avoid obscure side effects: The side effects of a function call include modification of parameters passed by reference,
+modification of global variables, and I/O operations. An obscure
+side effect is one that is not obvious from a casual examination of
+the code.
+\item[•] Length of a function should be within 20 lines
+\newpage
+\item[•] Header Format is as follows :-
+\begin{itemize}
+\item[] $<$header$>$
+\item[] Module Name
+\item[] Date of creation
+\item[] Author
+\item[] Modification history
+\item[] Synopsis
+\item[] Global variables
+\item[] Functions
+\item[] $</$header$>$
+\end{itemize}
+\end{itemize}
+
+\chapter{Code Testing Team}
+\section{Team Profile}
+The code testing team comprises of the following members, all of whom are
+Undergraduates currently pursuing Bachelor of Technology at Indian Institute of Technology
+Guwahati, India in the Department of Computer Science and Engineering. All of the members
+are currently in the sophomore year.
+\begin{itemize}
+\item[•] Harshit Agrawal 
+\item[•] Harshit Gupta
+\item[•] Harshit Sharma
+\end{itemize}
+All members of the team are proficient in Java and have past experience in developing android applications.
+
+\chapter{Code Inspection Reports}
+\section{Code Report by Harshit Agrawal:}
+\begin{itemize}
+\item[•] The headers of each module had all the details that are required from a good
+header, like - Name of the module, Date on which the module was created, Author’s
+name, Modification history, Synopsis of the module, Different functions supported,
+along with their input/output parameters.
+
+\item[•] There is scope of improvement in commenting of the code in FdActivity.java as the functionality of
+some functions are not explained properly
+
+\item[•] Proper indentation is followed while writing code.
+\item[•] No JUMP (go to) statements were used in the modules.
+\item[•] Error handling is minimal in insert method in DBHelper.java module.
+\item[•] Parameter naming could be improved for insert methods in DBHelper.java and DBImgHelper.java
+\item[•] Variable name is not CamelCase in EditStudentActivity.java line number 74 in code document.
+\item[•] No Non-Terminating Loops were found in the module.
+\item[•] OTBF indentation style has been properly followed. 
+\item[•] Proper validation and error handling is done in all Activity modules(There are 9 Activity modules and 3 Database module).
+\item[•] Capitalizing the Global Variables was very useful to read the code
+\item[•] Function names are according to proper conventions.
+\item[•] Overall flow of code is understandable easily.
+\end{itemize}
+\newpage
+\section{Code Report by Harshit Gupta:}
+\begin{itemize}
+\item[•] Nil uninitialized variables found in the module.
+\item[•] Parameter naming could be improved in DBHelper.java and DBImgHelper.java
+\item[•] The headers of each module had all the details that are required from a good
+header, like - Name of the module, Date on which the module was created, Author’s
+name, Modification history, Synopsis of the module, Different functions supported,
+along with their input/output parameters.
+\item[•] Error handling is minimal in insert method in DBImgHelper.java module.
+\item[•] OTBF indentation has been followed in java modules.
+\item[•] Proper indentation is followed while writing code.
+\item[•] All the loops terminated according to their condition. No Non-Terminating Loops
+were found.
+\item[•] There were none uninitialized variables found in any module.
+\item[•] There is scope of improvement in commenting of the code in FdActivity.java as the functionality of
+some functions are not explained properly
+\item[•] Proper validation and error handling is done in LoginActivity, SignupActivity, MainActivity and other 5 Activity modules.
+\item[•] Overall flow of code is understandable easily.
+\item[•] Function names are done according to CamelCase convention.
+\item[•] Capitalizing the Global Variables was very useful to read the code specially in databases.
+\end{itemize}
+\newpage
+\section{Code Report by Harshit Sharma:}
+\begin{itemize}
+\item[•] There were none uninitialized variables found in any module.
+\item[•] There is scope of improvement in commenting of the code in FdActivity.java as the functionality of
+some functions are not explained properly.
+\item[•] Error handling is minimal in insert method in DBHelper.java and DBImgHelper.java module.
+\item[•] OTBF indentation has been followed in java modules.
+\item[•] No JUMP (go to) statements were used in the modules.
+\item[•] All the loops terminated according to their condition. No Non-Terminating Loops
+were found.
+\item[•] Variable name is not CamelCase in EditStudentActivity.java and DeleteStudentActivity.java  in line number 74 and 61 respectively in code document.
+\item[•] When Camera Session starts, time is taken to train the images. During that time, it may predict incorrect answers
+\item[•] The headers of each module had all the details that are required from a good
+header, like - Name of the module, Date on which the module was created, Author’s
+name, Modification history, Synopsis of the module, Different functions supported,
+along with their input/output parameters.
+\item[•] Functions are named according to proper conventions.
+\item[•] Functions are exactly doing
+what the function name denotes.
+\item[•] Some functions are long, i.e. have length greater than 30 lines. They could be decomposed (e.g. onCreate() of ViewStudentActivity.java)
+\item[•] Variable name reflects its meaning and usage.
+\end{itemize}
+\chapter{Conclusion}
+The following violations of conventions were found to be
+common among the observations made by the individual
+team members and are listed below for future correction
+\begin{itemize}
+\item[•] Error handling is minimal in insert method in DBHelper.java and DBImgHelper.java module.
+
+\item[•] Parameter naming could be improved for insert methods in DBHelper.java and
+DBImgHelper.java
+
+\item[•] There is scope of improvement in commenting of the code in FdActivity.java as
+the functionality of some functions are not explained properly
+\end{itemize}
+
+\end{document}
